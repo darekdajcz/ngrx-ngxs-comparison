@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="form">
+            <div class="form-group">
+                <label class="col-4">Name</label>
+
+                <input pInputText type="text" formControlName="name" #name/>
+                <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)" class="alert alert-danger">
+                    <div *ngIf="form.controls['name'].errors?.['required']">
+                        Name is required.
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-4 mr-14">Email</label>
+                <input pInputText type="text" formControlName="email" #email/>
+                <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)" class="alert alert-danger">
+                    <div *ngIf="form.controls['email'].errors?.['required']">
+                        Email is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button pButton label="Create User"
+                        class="p-button-outlined mb-2 w-full"
+                        [disabled]="form.pristine || form.invalid"
+                        icon="pi pi-plus" (click)="addUser(name.value, email.value)">
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

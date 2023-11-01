@@ -1,0 +1,35 @@
+<h2>NGXS</h2>
+<button pButton label="Console Log NGRX Store"
+        class="p-button-outlined mb-2 w-full"
+        icon="pi pi-plus" (click)="click()">
+</button>
+<p-table [value]=" (users$ | async)" [tableStyle]="{ 'max-width': '50%' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <button pButton
+                        class="p-button-outlined mb-2 w-full"
+                        icon="pi pi-trash" (click)="deleteUser(user.name)">
+                </button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<ng-container *ngIf="(removedUsers$ | async).length ">
+    <h2>Deleted users history</h2>
+    <ul>
+        <li *ngFor="let item of removedUsers$ | async; index as i" class="custom-strikethrough">
+            {{item.name}}
+        </li>
+    </ul>
+</ng-container>
